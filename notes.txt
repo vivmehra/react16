@@ -1,0 +1,176 @@
+Module 1
+https://codepen.io
+<div id = 'app'></div>
+<div class='person'>
+  <h1>Vivek</h1>
+  <p>Age: 31</p>
+</div>
+<div class='person'>
+  <h1>vikas</h1>
+  <p>Age: 32</p>
+</div>
+
+CSS:
+.person{
+  border: 1px solid #eee;
+  width: 200px;
+  padding: 20px;
+  box-shadow: 0 2px 2px #ccc;
+  display: inline-block;
+  margin: 10px;
+}
+JS:
+function Person(props){
+  return(
+ <div className='person'>
+  <h1>{props.name}</h1>
+  <p>Age: {props.age}</p>
+</div>
+  );
+}
+ReactDOM.render(<Person name = 'viv' age ='30'/>, document.getElementById('p1'));
+var app = (
+  <div>
+  <Person name = 'viv' age ='30'/>
+  <Person name = 'vikas' age ='31'/>
+    </div>
+);
+ReactDOM.render(app, document.querySelector('#app'));
+
+React:
+-- js lib to build user interface
+-- to handle the HTML of web page, the view part of MVC
+Why?
+-- UI state management becomes easy, if we tend to add and remove dom elements very frequently it becomes combersome in plain js
+-- Focus on business logic, not on preventing app to explode
+-- large community, huge ecosystem
+Alternatives to React
+-- Angular
+-- Vue
+
+Module 2
+-- let and const
+		jsbin.com
+		const myName ='vivek';
+		console.log(myName);
+
+		myName = 'vikas'
+		console.log(myName);
+
+-- arrow function
+		function printMyName(name){
+			console.log(name);
+		}
+		printMyName('vivek');
+		
+		const printMyName = (name) => {
+			console.log(name)
+		}
+		
+		const printMyName = name => console.log(name);
+		if one argument remove ()
+		if return only only one line remove {}
+		const multiply = number => 2*number;
+		console.log(multiply(2));
+		
+-- export and import
+		write code in seperate file.
+		inside a js file we can include another js file
+		use babel to transform into es5 code
+-- classes
+		blueprints for object
+		properties(variables) and method(functions)
+		instantiated by new keyword
+		more convenient way of creating constructor function
+		supports inheritance, (like in prototypes)
+		property is added by adding a constructor
+		
+-- properties and methods: without this kewords and arrow functions
+		next gen JS use more modern syntax for properties and methods
+		removes this keyword problem
+-- spread and Rest Operators
+		3 dots
+		We call spread or rest where we use it
+		Spread is to split up arrays or object properties, creating new array with the old array elements
+		Rest is used in function call in arguments, to merge function arguments into an array and then we can apply array functions on that
+		const numbers = [1,2,3];
+		const newNumbers = [...numbers, 4];/ const newNumbers = [numbers, 4];
+		console.log(newNumbers);
+				
+		const person = {
+		  name: 'viv'
+		}
+
+		const newPerson = {
+		  ...person,
+		  age: 31
+		}
+		console.log(newPerson);
+
+		const filter = (...args) => {
+		  return args.filter(el => el === 1);
+		}
+		console.log(filter(1,2,3));
+
+
+-- destructuring
+		spread operator takes out all elements and all properties, destructuring takes out specific elements and specific properties
+-- reference and primitive type refresher
+-- refreshing arrays, map, find, filter, slice, splice, concat, reduce, findindex
+-- summary lecture 23
+
+Module 3 Basics
+-- Using Build Workflow
+	-- Why: Optimize Code for performance, Use Nex-Gen JS Features, More Productive(adding css presets automatically)
+	-- How: Dependency Management Tool(npm),Bundler(WepPack), Compiler(Babel), Development Server
+-- Using Create React App
+    npm install create-react-app -g(to install it globally)
+-- Folder Structure
+-- Understanding Component Basics: render method is to show something on screen, it must return the html needed.
+-- Understanding JSX: html like code(JSX) gets converted by React.createElement(
+        "div",
+        null,
+        React.createElement("h1", { className: "App" }, "Hi, I'm a react App")
+      ) into js
+-- JSX Restrictions
+	-- class reserved keyword: use className
+	-- div, h1 and all are provided by react library and not the real html tags
+	-- JSX must have one root element
+-- Create Functional Component
+	-- function name small case
+	-- import Person(camel case) in react all small case tags are reserved for the need of html
+-- Reusing components
+	-- we can reuse the components by wrting the tag again and again.
+-- Outputting Dyanamic Content
+	-- use {} {Math.floor(Math.random() * 30)} to execute
+	-- only one line expressions
+-- working with props
+-- Children Property
+	children reserved word
+-- Understanding and using state
+	-- information from outside: props
+	-- information from inside: state
+	-- class has properties state, 16.8 has some hooks by which we can use state in functional components also
+	-- state should be used with care, use functional components more, using states in many palces makes it difficult to manage.
+-- Handling Events with Methods
+	-- onClick and not onclick(as in normal JS)
+	-- onClick={this.swithNameHandler} dont add () it will execute the function on dom load, we need to pass the reference only
+	-- using ES6 syntax no need to add in constructor for this to be accessible
+	-- https://reactjs.org/docs/events.html#supported-events
+-- Manupulating the state
+	-- react will not recognize if you directly change the state using this.state.name = '', it will show a warning in console
+	-- if state or props changes then react analyse the dom and re render what ever is needed.
+	-- setState(takes an object as arg) will merge in the original state and do not update all the objects
+-- Using useState() hook for state manipulation: cover it later again
+
+-- Stateless vs Stateful Components
+	-- container, smart or stateful components
+	-- presentational, dumb or statefless components
+-- Passing Method Ref, between components
+	-- pass as props
+	-- use .bind(this. data) to pass data
+	-- or use arrow function syntax to pass data, no need to bind this(it can be in efficient)
+-- Two way binding
+	-- if use value without onChange you lock your input feild
+	-- pass changeHandler as props and take the value by event.target.value
+-- Adding Styling and stylesheet
