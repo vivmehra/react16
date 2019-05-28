@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 
+import Aux from "../../../hoc/Auxiliary";
+import withClass from "../../../hoc/wIthClass";
+
 import classes from "./Person.css";
+import PropTypes from "prop-types";
 
 class Person extends Component {
   // const rnd = Math.random();
@@ -10,7 +14,7 @@ class Person extends Component {
   render() {
     console.log("[Person.js] rendering..");
     return (
-      <div className={classes.Person}>
+      <Aux>
         <p onClick={this.props.click}>
           I'am a {this.props.name} and I am {this.props.age} years old
         </p>
@@ -20,8 +24,14 @@ class Person extends Component {
           onChange={this.props.changed}
           value={this.props.name}
         />
-      </div>
+      </Aux>
     );
   }
 }
-export default Person;
+Person.propTypes = {
+  click: PropTypes.func,
+  name: PropTypes.string,
+  age: PropTypes.number,
+  changed: PropTypes.func
+};
+export default withClass(Person, classes.Person);
