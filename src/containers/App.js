@@ -7,6 +7,7 @@ import UserInput from "../UserInput";
 //import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 import Aux from "../hoc/Auxiliary";
 import withClass from "../hoc/wIthClass";
+import AuthContext from "../context/auth-context";
 
 class App extends Component {
   constructor(props) {
@@ -22,7 +23,8 @@ class App extends Component {
     userName: "vivekState",
     showPersons: false,
     showCockpit: true,
-    changeCounter: 0
+    changeCounter: 0,
+    authenticated: false
   };
   static getDerivedStateFromProps(props, state) {
     console.log("[App.js getDerivedStateFromProps]", props);
@@ -90,6 +92,9 @@ class App extends Component {
   assignmentStateChangeHandler = event => {
     this.setState({ userName: event.target.value });
   };
+  loginHandler = () => {
+    this.setState({ authenticated: true });
+  };
   render() {
     // const style = {
     //   backgroundColor: "green",
@@ -122,15 +127,22 @@ class App extends Component {
         >
           Remove Cockpit
         </button>
-        {this.state.showCockpit ? (
-          <Cockpit
-            title={this.props.appTitle}
-            showPersons={this.state.showPersons}
-            personsLength={this.state.persons.length}
-            clicked={this.togglePersonsHandler}
-          />
-        ) : null}
-        {persons}
+        <AuthContext.Provider
+          value={{
+            authenticated: this.state.authenticated,
+            login: this.loginHandler
+          }}
+        >
+          {this.state.showCockpit ? (
+            <Cockpit
+              title={this.props.appTitle}
+              showPersons={this.state.showPersons}
+              personsLength={this.state.persons.length}
+              clicked={this.togglePersonsHandler}
+            />
+          ) : null}
+          {persons}
+        </AuthContext.Provider>
         {/* <div className="Person">
           <UserInput
             username={this.state.userName}
